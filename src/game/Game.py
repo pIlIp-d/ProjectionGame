@@ -36,9 +36,10 @@ class Game:
         image = np.zeros((image_size[1], image_size[0], 3), dtype=np.uint8)
 
         # Add a border to the image
-        image = cv2.copyMakeBorder(image, border_size, border_size, border_size, border_size,
-                                   cv2.BORDER_CONSTANT, value=(0, 0, 0))
-
+        image = cv2.copyMakeBorder(
+            image, border_size, border_size, border_size, border_size,
+            cv2.BORDER_CONSTANT, value=(0, 0, 0)
+        )
         # Calculate the position to center the text
         text_position = ((image.shape[1] - text_size[0]) // 2, (image.shape[0] + text_size[1]) // 2)
 

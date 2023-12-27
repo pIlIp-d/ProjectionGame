@@ -133,8 +133,10 @@ class GameSelectionView(TkinterView):
         button_frame = tk.Frame(parent)
         button_frame.pack(side=tk.RIGHT)
         # button_frame.grid(row=1, column=1, padx=10, pady=10, sticky=tk.S)
-        setup_button = tk.Button(button_frame, text="Setup",
-                                 command=lambda: self.controller.start_setup())
+        setup_button = tk.Button(
+            button_frame, text="Setup",
+            command=lambda: self.controller.start_setup()
+        )
         play_button = tk.Button(
             button_frame, text="Play Selected Game", command=lambda: self.controller.start_game(self.selected_game)
         )

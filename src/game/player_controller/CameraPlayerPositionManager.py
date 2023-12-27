@@ -44,7 +44,7 @@ class CameraPlayerPositionManager(PlayerPositionManager):
                     self._last_positions[i][j] = current_points[i][j]
         return current_points
 
-    def get_players_positions(self):
+    def  get_players_positions(self):
         frame = self.model.get_rgb_frame()
         players = self._human_pose_estimator.get_feet_position_from_image(frame)
         player_positions_2d = []
