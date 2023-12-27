@@ -1,0 +1,72 @@
+@startuml
+title Projection Game GUI
+skinparam linetype ortho
+
+package views {
+    abstract class View {
+      {abstract}  ~_init_frame() -> tk.Frame
+      ~_update(delta_time)
+    }
+
+    abstract class SetupView extends View {
+     {abstract} ~_add_menu(parent_frame)
+    }
+
+    abstract class SimpleLiveCameraSetupView extends SetupView {
+    }
+
+    class CameraSetupView  extends SimpleLiveCameraSetupView {
+    }
+
+    class HardwareSetupView extends SimpleLiveCameraSetupView {
+    }
+    class PlayingFieldSetupView extends SetupView {
+    }
+
+    class GameSelectionView extends View {
+    }
+
+    class GameView extends View {
+    }
+}
+
+package "models" {
+  class Config
+  class Model
+  class CameraFrame
+  enum Views
+  Model -> Config
+  Model -down-> CameraFrame
+}
+
+package "game" {
+  abstract class Game {
+    {abstract} +get_start_screen() @classmethod
+    {abstract} +get_next_frame()
+  }
+  class EmptyGame extends Game
+  package "game.player_controller" {
+    abstract class PlayerPositionManager
+    class CameraPlayerPositionManager extends PlayerPositionManager
+    class FloorPosEstimator
+    class HumanPoseEstimator
+    class SmoothingFilter
+    CameraPlayerPositionManager -down-> FloorPosEstimator
+    CameraPlayerPositionManager -down-> HumanPoseEstimator
+    CameraPlayerPositionManager -down-> SmoothingFilter
+  }
+  Game-> PlayerPositionManager
+}
+
+package "controller" {
+  class SetupController
+}
+
+View --> SetupController
+SetupController -> Model
+SetupController -down-> Views
+
+SetupController -> Game
+
+
+@enduml
