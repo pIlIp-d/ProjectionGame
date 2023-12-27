@@ -1,5 +1,4 @@
 import os
-from typing import Tuple, List
 
 import mediapipe as mp
 from mediapipe.tasks import python
@@ -12,7 +11,7 @@ class GoogleBlazeposeHumanPoseEstimator(HumanPoseEstimator):
     def __init__(self):
         super().__init__()
         base_options = python.BaseOptions(
-            model_asset_path=os.path.join(os.path.dirname(__file__), "../../../pose_landmarker_lite.task"))
+            model_asset_path=os.path.join("models/pose_landmarker/pose_landmarker_lite.task"))
         options = vision.PoseLandmarkerOptions(
             base_options=base_options,
             output_segmentation_masks=True,

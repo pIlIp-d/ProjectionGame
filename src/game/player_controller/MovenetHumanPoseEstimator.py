@@ -14,7 +14,7 @@ class MovenetHumanPoseEstimator(HumanPoseEstimator, Initiated):
 
     @classmethod
     def init(cls):
-        cls._model = tf.saved_model.load("../movenet-multipose-lightning/")
+        cls._model = tf.saved_model.load("models/movenet-multipose-lightning/")
 
     def __init__(self, y_offset=0.1, confidence_threshold=0.2, distance_threshold=0.05):
         super().__init__()

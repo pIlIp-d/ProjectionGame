@@ -3,8 +3,7 @@ import cv2
 
 class CameraFrame:
     def __init__(self, *param, **kwargs):
-        self.cap = cv2.VideoCapture("../two_person_demo.mp4")#*param, **kwargs)
-        # "../two_person_demo2.mp4" )#
+        self.cap = cv2.VideoCapture(*param, **kwargs)
 
     def get_dimensions(self):
         return [
