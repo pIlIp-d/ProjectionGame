@@ -1,0 +1,6 @@
+repos:
+- repo: https://github.com/asottile/cheetah_lint
+  rev: v1.4.0
+  hooks:
+    - id: cheetah-reorder-imports
+    - id: cheetah-flake
