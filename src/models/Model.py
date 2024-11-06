@@ -58,3 +58,6 @@ class Model:
         if self.camera is None:
             self.camera = CameraFrame(self.camera_source)
         return self.camera.get_image()
+
+    def close(self):
+        self.camera.stop()

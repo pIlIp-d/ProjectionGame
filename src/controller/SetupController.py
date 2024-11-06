@@ -3,6 +3,8 @@ import math
 import numpy as np
 
 from src.game.EmptyGame import EmptyGame
+from src.game.FruitNinja import FruitNinja
+from src.game.Lasers import LaserGame
 from src.models.Model import Model
 from src.views.CameraSetupView import CameraSetupViewSimple
 from src.views.GameSelectionView import GameSelectionView
@@ -20,14 +22,14 @@ class SetupController:
 
         self._current_game = None
         self.games = [
-            (EmptyGame, "DrawInstallation"),
+            (FruitNinja, "Fruit Ninja"),
             (EmptyGame, "Pong"),
             (EmptyGame, "IceHockey"),
-            (EmptyGame, "Lasers"),
+            (LaserGame, "Lasers"),
             (EmptyGame, "Mini-golf"),
             (EmptyGame, "Bowling"),
             (EmptyGame, "Billiard"),
-            (EmptyGame, "Fruit Ninja"),
+            (EmptyGame, "DrawInstallation"),
             (EmptyGame, "Space Invaders")
         ]
         self.views = [
@@ -101,9 +103,8 @@ class SetupController:
         self.set_view(Views.GAME_VIEW)
 
     def close_window(self):
-        for view in self.views:
-            view.destroy_window()
         self.views[self.current_view.value].root.destroy()
+        self.model.close()
 
     def get_startscreen_of_game(self, i):
         return self.games[i][0].get_start_screen(self.games[i][1])

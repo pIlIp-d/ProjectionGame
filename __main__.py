@@ -1,8 +1,11 @@
+from ttkthemes import ThemedTk
 import tkinter as tk
+from tkinter import ttk
 
 from threading import Thread
 
 from src.controller.SetupController import SetupController
+from src.game.player_controller.HandPoseEstimator import HandPoseEstimator
 from src.game.player_controller.MovenetHumanPoseEstimator import MovenetHumanPoseEstimator
 from src.models.Model import Model
 
@@ -20,7 +23,7 @@ initable_classes = [
 
 
 def main():
-    root = tk.Tk()
+    root = ThemedTk(theme="breeze")
 
     model = Model()
     SetupController(model, root)
@@ -30,7 +33,7 @@ def main():
             c.init()
 
     # todo find a better way, this one produces lag
-    Thread(target=init).start()
+    Thread(target=init, daemon=True).start()
 
     # app = CameraSelectView(root)
     root.mainloop()

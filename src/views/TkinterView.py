@@ -68,8 +68,8 @@ class TkinterView(View):
         canvas_aspect_ratio = canvas_width / canvas_height
         image_aspect_ratio = initial_width / initial_height
 
-        print(canvas_width, canvas_height, initial_width, initial_height)
-        print(canvas_aspect_ratio, image_aspect_ratio)
+        # print(canvas_width, canvas_height, initial_width, initial_height)
+        # print(canvas_aspect_ratio, image_aspect_ratio)
 
         if canvas_aspect_ratio > image_aspect_ratio:
             new_width = max(int(canvas_height * image_aspect_ratio), 1)

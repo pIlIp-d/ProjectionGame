@@ -1,9 +1,38 @@
 import cv2
 
+from threading import Thread
+from time import sleep
+
+
+class WebcamVideoStream:
+    def __init__(self, src=0):
+        self.stream = cv2.VideoCapture(src)
+        self.grabbed, self.frame = self.stream.read()
+        self.stopped = False
+        self.thread = Thread(target=self.update, daemon=True, args=())
+        self.thread.daemon = True
+        self.thread.start()
+
+    def update(self):
+        while True:
+            if self.stopped:
+                return
+            grabbed, frame = self.stream.read()
+            if grabbed:
+                self.frame = frame
+
+    def read(self):
+        return self.frame
+
+    def stop(self):
+        self.stopped = True
+        self.thread.join()
+        self.stream.release()
+
 
 class CameraFrame:
     def __init__(self, *param, **kwargs):
-        self.cap = cv2.VideoCapture(*param, **kwargs)
+        self.cap = WebcamVideoStream(*param, **kwargs)
 
     def get_dimensions(self):
         return [
@@ -12,16 +41,10 @@ class CameraFrame:
         ]
 
     def get_image(self):
-        if not self.cap.isOpened():
-            raise IOError("video finished or camera disconnected")
-        success, frame = self.cap.read()
-        if not success:
-            self.cap.set(cv2.CAP_PROP_POS_FRAMES, 0)
-            success, frame = self.cap.read()
-            #raise IOError("empty frame")
+        frame = self.cap.read()
         frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         return frame
 
-    def __del__(self):
+    def stop(self):
         # todo properly clean it up (deconstructor maybe called to late)
-        self.cap.release()
+        self.cap.stop()

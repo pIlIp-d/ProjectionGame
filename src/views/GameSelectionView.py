@@ -40,6 +40,7 @@ class GameSelectionView(TkinterView):
         canvas_width = max(1, self._canvas.winfo_width() - self._scrollbar.winfo_width())
         canvas_height = max(1, self._canvas.winfo_height())
         grid_item_width = canvas_width // self.cols - 2 * self._padding
+        grid_item_width = max(grid_item_width, 1)
 
         def resize_with_aspect_ratio(img):
             new_height = int(grid_item_width / 1.4)
@@ -148,7 +149,7 @@ class GameSelectionView(TkinterView):
     def _set_background_of_button(self, index, color):
         for i, key in enumerate(self._button_grid.children):
             if i == index:
-                print(f"set {index} to {color}")
+                # print(f"set {index} to {color}")
                 self._button_grid.children[key].config(
                     highlightbackground=color,
                     highlightcolor=color
