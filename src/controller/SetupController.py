@@ -23,13 +23,13 @@ class SetupController:
         self._current_game = None
         self.games = [
             (FruitNinja, "Fruit Ninja"),
+            (LaserGame, "Lasers"),
+            (EmptyGame, "DrawInstallation"),
             (EmptyGame, "Pong"),
             (EmptyGame, "IceHockey"),
-            (LaserGame, "Lasers"),
             (EmptyGame, "Mini-golf"),
             (EmptyGame, "Bowling"),
             (EmptyGame, "Billiard"),
-            (EmptyGame, "DrawInstallation"),
             (EmptyGame, "Space Invaders")
         ]
         self.views = [
@@ -95,6 +95,9 @@ class SetupController:
         return self.model.get_cameras()
 
     def start_game(self, i):
+        if isinstance(self._current_game, EmptyGame) or self.games[i][0] == EmptyGame:
+            return  # placeholder games cant be started
+
         if self._current_game is not None:
             self._current_game.stop_game()
         # instantiate chosen game

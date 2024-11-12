@@ -1,4 +1,3 @@
-from src.game.player_controller.MovenetHumanPoseEstimator import MovenetHumanPoseEstimator
 from ..game.player_controller.HandPoseEstimator import HandPoseEstimator
 from ..models.Model import Model
 from ..game.player_controller.FloorPosEstimator import FloorPosEstimator

@@ -2,8 +2,6 @@ import cv2
 import numpy as np
 
 from src.game.Game import Game
-import cProfile
-import random
 
 
 class EmptyGame(Game):
@@ -17,38 +15,6 @@ class EmptyGame(Game):
     @classmethod
     def get_start_screen(cls, optional_text=""):
         return cls.create_image_with_text(optional_text)
-
-    # def get_next_frame(self, delta_time):
-
-    #     if self.counter % 50 == 0:
-    #         file = f'profiling_results{str(self.counter)}.prof'
-    #         cProfile.runctx('self._player_position_manager.get_players_positions()', globals(), locals(), file)
-    #     if self.counter % 1000 == 0:
-    #         self.image = np.zeros(self._player_position_manager.dimensions, dtype=np.uint8)
-
-    #     players = self._player_position_manager.get_players_positions()
-    #     colors = [(0, 255, 0), (255, 0, 0), (0, 0, 255)]
-    #     for i, player in enumerate(players):
-    #         for foot in player:
-    #             x, y = foot
-    #             cv2.circle(self.image, (int(x), int(y)), radius=15, color=colors[i % len(colors)], thickness=-1)
-
-    #     font = cv2.FONT_HERSHEY_SIMPLEX
-    #     font_scale = 1
-    #     font_thickness = 2
-    #     font_color = (255, 255, 255)  # white color in BGR format
-
-    #     # Determine the position to place the text
-    #     text_position = (50, 200)
-
-    #     # Add text to the image
-    #     seconds = delta_time.total_seconds()
-
-    #     # cv2.putText(self.image, "0" if seconds == 0 else str(int(1 / seconds)),
-    #     #            text_position, font, font_scale, font_color, font_thickness)
-    #     self.counter += 1
-    #     self._last_players = players
-    #     return self.image
 
     def draw_text(self, img, text,
                   font=cv2.FONT_HERSHEY_PLAIN,
@@ -66,10 +32,6 @@ class EmptyGame(Game):
         cv2.putText(img, text, (x, y + text_h + font_scale - 1), font, font_scale, text_color, font_thickness)
 
     def get_next_frame(self, delta_time):
-        if False and self.counter % 100 == 0:
-            file = f'profiling_results{str(self.counter)}.prof'
-            cProfile.runctx('self._player_position_manager.get_players_positions()', globals(), locals(), file)
-
         if self.counter % 1000 == 0:
             self.image = np.zeros(self._player_position_manager.dimensions, dtype=np.uint8)
 
@@ -85,7 +47,8 @@ class EmptyGame(Game):
                 cv2.circle(self.image, (int(x), int(y)), radius=15, color=colors[i % len(colors)], thickness=-1)
 
                 # If there are previous positions to interpolate with
-                if seconds < 3 and self._last_players and len(self._last_players) > i and len(self._last_players[i]) > j:
+                if seconds < 3 and self._last_players and len(self._last_players) > i \
+                        and len(self._last_players[i]) > j:
                     last_foot = self._last_players[i][j]
 
                     # Interpolate between current foot position and last foot position

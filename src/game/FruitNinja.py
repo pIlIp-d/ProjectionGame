@@ -3,7 +3,6 @@ import cv2
 import numpy as np
 
 from src.game.Game import Game
-import cProfile
 import random
 from time import sleep
 
@@ -38,10 +37,6 @@ class FruitNinja(Game):
         cv2.putText(img, text, (x, y + text_h + font_scale - 1), font, font_scale, text_color, font_thickness)
 
     def get_next_frame(self, delta_time):
-        if False and self.counter % 50 == 0:
-            file = f'new_profiling_results{str(self.counter)}.prof'
-            cProfile.runctx('self._player_position_manager.get_players_positions()', globals(), locals(), file)
-
         self.image = np.zeros(self._player_position_manager.dimensions, dtype=np.uint8)
 
         height, width, _ = self.image.shape
@@ -56,8 +51,6 @@ class FruitNinja(Game):
             sleep(sleep_time)  # Sleep to maintain target FPS
 
         players = self._player_position_manager.get_players_positions()
-
-        colors = [(0, 255, 0), (255, 0, 0), (0, 0, 255)]
 
         # Update fruits
         if random.random() < self.difficulty/100:  # Control fruit spawn rate
@@ -74,7 +67,8 @@ class FruitNinja(Game):
             for j, point in enumerate(player):
                 x, y = point
                 # If there are previous positions to interpolate with
-                if seconds < 3 and self._last_players and len(self._last_players) > i and len(self._last_players[i]) > j:
+                if seconds < 3 and self._last_players and len(self._last_players) > i \
+                        and len(self._last_players[i]) > j:
                     last_foot = self._last_players[i][j]
 
                     # Interpolate between current foot position and last foot position

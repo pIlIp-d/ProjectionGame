@@ -64,79 +64,9 @@ class MovenetHumanPoseEstimator(HumanPoseEstimator, Initiated):
         return keypoints_with_scores
 
     def _get_keypoints(self, image):
-        # input_image = self._preprocess_image(image)
-        # outputs = self._model.signatures["serving_default"](input_image)
-        # keypoints = outputs['output_0'].numpy()
-        # return keypoints
-        # self._model.set_tensor(input_details[0]['index'], image)
-        # self._model.invoke()
-        # keypoints = self._model.get_tensor(output_details[0]['index'])
-        # return keypoints
         image = self._preprocess_image(image)
         keypoints = self._detect(image)
         return keypoints
-
-        keypoints = self._model.signatures['serving_default'](input_image)['output_0'].numpy()
-        return keypoints
-
-        # input_image = tf.image.resize_with_pad(tf.expand_dims(image, axis=0), 192, 192)
-        # input_image = tf.cast(input_image, dtype=tf.int32)
-        # self._model.set_tensor(input_details[0]['index'], input_image)
-
-        # # Run inference
-        # self._model.invoke()
-
-        # # Get the output tensor
-        # keypoints_with_scores = self._model.get_tensor(output_details[0]['index'])
-
-        # # Reshape to get keypoints
-        # keypoints = keypoints_with_scores.reshape((1, 1, 17, 3))  # Reshape if necessary
-
-        # return keypoints[0][0]  # Return keypoints for the first person
-        # return keypoints_with_scores = detect(self._model, tf.cast(image_tensor, dtype=tf.uint8))
-
-        # keypoints_with_scores = results
-
-        # # Extract keypoints and their confidence scores
-        # keypoints = keypoints_with_scores[0][0][:, :2]  # Get x, y coordinates
-        # scores = keypoints_with_scores[0][0][:, 2]      # Get confidence scores
-
-        # return keypoints, scores
-
-    def _organize_keypoints_by_person(self, keypoints):
-        persons = []
-        for person_keypoints in keypoints[0]:
-            def get_keypoint(keypoint_id):
-                return (
-                    person_keypoints[3 * keypoint_id + 1],
-                    person_keypoints[3 * keypoint_id],
-                    person_keypoints[3 * keypoint_id + 2]
-                )
-
-            def already_in_persons(f):
-                return any(
-                    self._distance_threshold > self._distance(existing_foot, f[0])
-                    for existing_person in persons for existing_foot in existing_person
-                )
-
-            feet = [
-                # get_keypoint(15),  # left foot
-                # get_keypoint(16)  # right foot
-                get_keypoint(9),  # left hand
-                get_keypoint(10)  # right hand
-            ]
-
-            if all([foot[2] > self._confidence_threshold for foot in feet]) and not already_in_persons(feet):
-                persons.append(feet)
-
-        def sorted_persons_from_left_to_right():
-            def avg_for_x(l):
-                return sum(x for x, _, _ in l) / len(l)
-
-            return sorted(persons, key=lambda p: avg_for_x(p))
-
-        return [[[x, y] for (x, y, _) in person]
-                for person in sorted_persons_from_left_to_right()]
 
     @staticmethod
     def _preprocess_image(image):

@@ -1,11 +1,8 @@
 from ttkthemes import ThemedTk
-import tkinter as tk
-from tkinter import ttk
 
 from threading import Thread
 
 from src.controller.SetupController import SetupController
-from src.game.player_controller.HandPoseEstimator import HandPoseEstimator
 from src.game.player_controller.MovenetHumanPoseEstimator import MovenetHumanPoseEstimator
 from src.models.Model import Model
 

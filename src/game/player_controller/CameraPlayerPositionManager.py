@@ -1,12 +1,10 @@
 from collections import deque
 import numpy as np
 
-from src.game.player_controller.HandPoseEstimator import HandPoseEstimator
 from src.game.player_controller.MovenetHumanPoseEstimator import MovenetHumanPoseEstimator
 from src.game.player_controller.PlayerPositionManager import PlayerPositionManager
 from src.game.player_controller.SmoothingFilter import SmoothingFilter
 from src.game.player_controller.FloorPosEstimator import FloorPosEstimator
-from src.game.player_controller.HumanPoseEstimator import HumanPoseEstimator
 from src.models.Model import Model
 
 
@@ -84,15 +82,3 @@ class CameraPlayerPositionManager(PlayerPositionManager):
 
         self._counter += 1
         return self._last_positions
-
-
-"""
-player:
-    feet:
-        x: int
-        y: int
-    non_visible_frames: int
-
-if player_n.non_visible_frames > X:
-    remove player_n
-"""

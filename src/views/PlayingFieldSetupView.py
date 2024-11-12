@@ -1,7 +1,6 @@
 import tkinter as tk
 
 import cv2
-from PIL import Image, ImageTk
 
 from src.views.SetupView import SetupView
 

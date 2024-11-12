@@ -1,7 +1,6 @@
 import cv2
 
 from threading import Thread
-from time import sleep
 
 
 class WebcamVideoStream:
@@ -46,5 +45,4 @@ class CameraFrame:
         return frame
 
     def stop(self):
-        # todo properly clean it up (deconstructor maybe called to late)
         self.cap.stop()

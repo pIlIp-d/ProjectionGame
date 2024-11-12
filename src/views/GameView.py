@@ -1,4 +1,3 @@
-from PIL import ImageTk, Image
 
 from src.views.TkinterView import TkinterView
 import tkinter as tk

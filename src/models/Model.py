@@ -19,7 +19,9 @@ class Model:
     @camera_source.setter
     def camera_source(self, camera_name):
         self._camera_config.camera_name = camera_name
-        del self.camera
+        if self.camera:
+            self.camera.stop()
+            del self.camera
         self.camera = CameraFrame(self.camera_source)
 
     @property

@@ -138,6 +138,3 @@ class Laser:
         # Check if the laser intersects the player's position
         dist = np.linalg.norm(np.array([self.x, self.y]) - np.array([player_x, player_y]))
         return dist < PLAYER_RADIUS  # If the distance between laser and player is smaller than the player's radius
-
-
-# Now, to play, you'll need to instantiate the LaserAvoid class, control the player position using a game loop, and detect user input to move the player.

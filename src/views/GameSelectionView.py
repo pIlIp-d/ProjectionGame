@@ -28,17 +28,14 @@ class GameSelectionView(TkinterView):
     def _init_frame(self):
         frame = tk.Frame(self.root)
         frame.pack(side=tk.LEFT, fill=tk.BOTH, padx=10, pady=10, expand=True)
-        # frame.columnconfigure(0, weight=3)
-        # frame.columnconfigure(1, weight=1)
-        # frame.rowconfigure(0, weight=1)
-        # frame.rowconfigure(1, weight=1)
+
         self._add_button_sidebar(frame)
         self._add_game_grid(frame)
         return frame
 
     def _update_grid(self):
         canvas_width = max(1, self._canvas.winfo_width() - self._scrollbar.winfo_width())
-        canvas_height = max(1, self._canvas.winfo_height())
+        # canvas_height = max(1, self._canvas.winfo_height())
         grid_item_width = canvas_width // self.cols - 2 * self._padding
         grid_item_width = max(grid_item_width, 1)
 
@@ -143,8 +140,6 @@ class GameSelectionView(TkinterView):
         )
         setup_button.pack(side=tk.BOTTOM)
         play_button.pack(side=tk.BOTTOM)
-        # setup_button.grid(row=0, column=0, padx=10, pady=10, sticky=tk.SE)
-        # play_button.grid(row=1, column=0, padx=10, pady=10, sticky=tk.SE)
 
     def _set_background_of_button(self, index, color):
         for i, key in enumerate(self._button_grid.children):
