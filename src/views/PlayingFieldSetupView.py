@@ -9,7 +9,12 @@ class PlayingFieldSetupView(SetupView):
 
     def _add_menu(self, menu_frame):
         tutorial_text = tk.Label(menu_frame, text="""
-            Use your mouse to set the points to the edges of the projected Image.
+            Use your mouse to set the
+            limits of your playing
+            field reach.
+
+            Being a bit further away
+            makes it easier to play.
         """)
         tutorial_text.pack(side=tk.TOP)
         # tutorial_text.grid(row=0, column=1, padx=10, pady=10, sticky=tk.N)

@@ -9,7 +9,7 @@ from src.models.Model import Model
 from src.views.CameraSetupView import CameraSetupViewSimple
 from src.views.GameSelectionView import GameSelectionView
 from src.views.GameView import GameView
-from src.views.HardwareSetupView import HardwareSetupViewSimple
+# from src.views.HardwareSetupView import HardwareSetupViewSimple
 from src.views.PlayingFieldSetupView import PlayingFieldSetupView
 from src.models.Views import Views
 
@@ -34,7 +34,7 @@ class SetupController:
         ]
         self.views = [
             CameraSetupViewSimple(root=self.root, controller=self),
-            HardwareSetupViewSimple(root=self.root, controller=self),
+            # HardwareSetupViewSimple(root=self.root, controller=self),
             PlayingFieldSetupView(root=self.root, controller=self),
             GameSelectionView(root=self.root, controller=self, amount_of_games=len(self.games)),
             GameView(root=self.root, controller=self)
