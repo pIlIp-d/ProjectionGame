@@ -63,6 +63,41 @@ class MovenetHumanPoseEstimator(HumanPoseEstimator, Initiated):
         keypoints_with_scores = self._model.get_tensor(output_details[0]['index'])
         return keypoints_with_scores
 
+    def _organize_keypoints_by_person(self, keypoints):
+        persons = []
+        for person_keypoints in keypoints[0]:
+            def get_keypoint(keypoint_id):
+                return (
+                    person_keypoints[3 * keypoint_id + 1],
+                    person_keypoints[3 * keypoint_id],
+                    person_keypoints[3 * keypoint_id + 2]
+                )
+
+            def already_in_persons(f):
+                return any(
+                    self._distance_threshold > self._distance(existing_foot, f[0])
+                    for existing_person in persons for existing_foot in existing_person
+                )
+
+            feet = [
+                # get_keypoint(15),  # left foot
+                # get_keypoint(16)  # right foot
+                get_keypoint(9),  # left hand
+                get_keypoint(10)  # right hand
+            ]
+
+            if all([foot[2] > self._confidence_threshold for foot in feet]) and not already_in_persons(feet):
+                persons.append(feet)
+
+        def sorted_persons_from_left_to_right():
+            def avg_for_x(points):
+                return sum(x for x, _, _ in points) / len(points)
+
+            return sorted(persons, key=lambda p: avg_for_x(p))
+
+        return [[[x, y] for (x, y, _) in person]
+                for person in sorted_persons_from_left_to_right()]
+
     def _get_keypoints(self, image):
         image = self._preprocess_image(image)
         keypoints = self._detect(image)

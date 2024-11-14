@@ -10,7 +10,7 @@ import tensorflow as tf
 from ai_edge_litert.interpreter import Interpreter
 
 
-class MovenetHumanPoseEstimator(HumanPoseEstimator, Initiated):
+class MovenetSingleHumanPoseEstimator(HumanPoseEstimator, Initiated):
     _model = None
 
     @classmethod
