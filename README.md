@@ -47,6 +47,17 @@ Finally, a multiplayer mode, which is currently only performance limited, would 
 pip install -r requirements-txt
 ```
 
+
+## Usage
+
+```
+python __main__.py
+```
+
+First you will see some Setup Views for the camera and playing field.
+After that you can select a Game (not all are working, yet).
+Enjoy playing, a bit further away makes in easier.
+
 ## Dev Setup
 ```
 pip install -r requirements-dev-txt
