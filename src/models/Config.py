@@ -14,9 +14,14 @@ class Config:
         self._config = json.loads(config_string)
 
     def _get_property(self, property_name, default_value=None):
-        if property_name not in self._config.keys():
-            return default_value
-        return self._config[property_name]
+        try:
+            if property_name not in self._config.keys():
+                return default_value
+            return self._config[property_name]
+        except json.decoder.JSONDecodeError:
+            # clear config on error
+            os.remove(self.__config_file)
+            self._config = "{}"
 
     def _set_property(self, property_name, value):
         self._config[property_name] = value
