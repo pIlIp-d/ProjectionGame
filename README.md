@@ -44,14 +44,14 @@ Finally, a multiplayer mode, which is currently only performance limited, would 
 
 ## Installation
 ```
-pip install -r requirements.txt
+python3.10 -m pip install -r requirements.txt
 ```
 
 
 ## Usage
 
 ```
-python __main__.py
+python3.10 __main__.py
 ```
 
 First you will see some Setup Views for the camera and playing field.
@@ -60,7 +60,7 @@ Enjoy playing, a bit further away makes in easier.
 
 ## Dev Setup
 ```
-pip install -r requirements-dev.txt
+python3.10 -m pip install -r requirements-dev.txt
 ```
 and then run
 ```
