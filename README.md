@@ -44,7 +44,7 @@ Finally, a multiplayer mode, which is currently only performance limited, would 
 
 ## Installation
 ```
-pip install -r requirements-txt
+pip install -r requirements.txt
 ```
 
 
@@ -60,7 +60,7 @@ Enjoy playing, a bit further away makes in easier.
 
 ## Dev Setup
 ```
-pip install -r requirements-dev-txt
+pip install -r requirements-dev.txt
 ```
 and then run
 ```
