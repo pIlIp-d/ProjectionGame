@@ -35,8 +35,8 @@ class CameraFrame:
 
     def get_dimensions(self):
         return [
-            int(self.cap.read(cv2.CAP_PROP_FRAME_WIDTH)),
-            int(self.cap.read(cv2.CAP_PROP_FRAME_WIDTH))
+            int(self.cap.stream.get(cv2.CAP_PROP_FRAME_WIDTH)),
+            int(self.cap.stream.get(cv2.CAP_PROP_FRAME_WIDTH))
         ]
 
     def get_image(self):
