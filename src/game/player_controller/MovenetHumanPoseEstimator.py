@@ -2,12 +2,11 @@ from time import sleep
 
 import cv2
 import numpy as np
+import os
 
 from src.game.Initiated import Initiated
 from src.game.player_controller.HumanPoseEstimator import HumanPoseEstimator
-
 import tensorflow as tf
-from ai_edge_litert.interpreter import Interpreter
 
 
 class MovenetHumanPoseEstimator(HumanPoseEstimator, Initiated):
@@ -15,9 +14,9 @@ class MovenetHumanPoseEstimator(HumanPoseEstimator, Initiated):
 
     @classmethod
     def init(cls):
-        cls._model = Interpreter(
-            model_path="models/movenet-lighting-float16/movenet-tflite-multipose-float16-v1.tflite")
-        # cls._model.allocate_tensors()
+        cls._model = tf.lite.Interpreter(
+            model_path=os.path.join("models", "movenet-lighting-float16", "movenet-tflite-multipose-float16-v1.tflite"))
+        cls._model.allocate_tensors()
         # cls._model = tf.saved_model.load("models/movenet-multipose-lightning/")
 
     def __init__(self, y_offset=0.1, confidence_threshold=0.2, distance_threshold=0.05):

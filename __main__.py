@@ -1,4 +1,4 @@
-from ttkthemes import ThemedTk
+from tkinter import Tk
 
 from threading import Thread
 
@@ -20,7 +20,7 @@ initable_classes = [
 
 
 def main():
-    root = ThemedTk(theme="breeze")
+    root = Tk()  # theme="breeze")
 
     model = Model()
     SetupController(model, root)

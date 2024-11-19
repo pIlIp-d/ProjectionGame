@@ -5,6 +5,7 @@ import numpy as np
 from src.game.Initiated import Initiated
 from src.game.player_controller.HumanPoseEstimator import HumanPoseEstimator
 import mediapipe as mp
+import os
 
 MARGIN = 10  # pixels
 FONT_SIZE = 1
@@ -19,7 +20,8 @@ class HandPoseEstimator(HumanPoseEstimator, Initiated):
     @classmethod
     def init(cls):
         VisionRunningMode = mp.tasks.vision.RunningMode
-        baseOptions = mp.tasks.BaseOptions(model_asset_path='models/hand_landmarker/hand_landmarker.task')
+        baseOptions = mp.tasks.BaseOptions(model_asset_path=os.path.join(
+            'models', 'hand_landmarker', 'hand_landmarker.task'))
         cls._options = mp.tasks.vision.HandLandmarkerOptions(
             base_options=baseOptions,
             running_mode=VisionRunningMode.IMAGE
