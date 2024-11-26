@@ -18,6 +18,7 @@ Performance of the entire program was also evaluated and improved over multiple 
 
 For a good feel at least ~20 FPS for the model are needed. Importantly, the 1% lows should be close to this as well because they drastically increase the feel of lag if they are low. The final solution still has some lags but manages to keep the FPS at over 30/second (which is manually limited to 30FPS to keep a stable playing experience).
 
+Additionally, an example video was recorded to repeatably test the program and evaluate the changes in performance between the models or implementations.
 
 ### Most important Files
 
